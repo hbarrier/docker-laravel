@@ -1,0 +1,21 @@
+version: "3.9"
+services:
+    # MySQL Database
+    mysql:
+        image: mysql
+        ports:
+            - "3307:3306"
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: Picard
+        volumes:
+            - ./mysqldata:/var/lib/mysql
+            - ./picard_db_dump.sql:/docker-entrypoint-initdb.d/dump.sql
+    adminer:
+        image: adminer
+        restart: always
+        ports:
+            - "3000:8080"
+volumes:
+    dbdata:
